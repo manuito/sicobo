@@ -1,12 +1,12 @@
 package application
 
 import (
+	"biblio/tools"
 	"net"
-	"robotoby/tools"
 )
 
 /*
- * Global states / configuration access for the current pilote application
+ * Global states / configuration access for the current lib app
  */
 
 // State : Global application environment

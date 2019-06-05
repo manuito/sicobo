@@ -7,11 +7,11 @@ import (
 )
 
 /*
- * Pilote app configuration management.
+ * Lib managment app configuration management.
  * Uses file "conf.json" for configuration definition
  */
 
-// Configuration : Robot configuration holder
+// Configuration : Global configuration holder, as conf.json
 type Configuration struct {
 	BingAPIkey       string `json:"bingAPIkey"`
 	GoogleBookAPIKey string `json:"googleBookAPIKey"`
