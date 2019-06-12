@@ -9,6 +9,7 @@ type BookCollection struct {
 type Book struct {
 	Title            string
 	Picture          string
+	PictureURL       string
 	Isbn             string
 	PublishedDate    string
 	Category         string
@@ -23,7 +24,7 @@ type CandidateDetails struct {
 	DegradedSource bool
 	Collections    []string
 	Titles         []string
-	Pictures       []string
+	PictureURLs    []string
 }
 
 type Author struct {

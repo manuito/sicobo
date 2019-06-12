@@ -94,6 +94,8 @@ func loadBook(isbn string) Book {
 
 	var result Book
 	findErr := onCollection("books").FindOne(context.TODO(), bson.D{{"isbn", isbn}}).Decode(&result)
+
+	// Not found
 	if findErr != nil {
 		application.Debug("Book with isbn " + isbn + " doesn't exist yet")
 	}
@@ -132,14 +134,16 @@ func updateBook(book *Book) {
 		context.TODO(),
 		bson.D{{"isbn", book.Isbn}},
 		bson.D{{"$set",
-			bson.D{{"picture", book.Picture},
+			bson.D{
+				{"picture", book.Picture},
+				{"pictureurl", book.PictureURL},
 				{"publisheddate", book.PublishedDate},
 				{"category", book.Category},
 				{"snippet", book.Snippet},
 				{"pagecount", book.PageCount},
 				{"candidatedetails", bson.D{{"collections", book.CandidateDetails.Collections},
 					{"titles", book.CandidateDetails.Titles},
-					{"pictures", book.CandidateDetails.Pictures}}}}}})
+					{"pictureurls", book.CandidateDetails.PictureURLs}}}}}})
 	if err != nil {
 		application.Error("Cannot update book to mongo instance", err)
 	}

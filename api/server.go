@@ -36,6 +36,19 @@ func getLibraryBooks(request *restful.Request, response *restful.Response) {
 	response.WriteEntity(store.ListExistingBooks())
 }
 
+// GET http://1.2.3.4:8080/api/v1/library/{database}/books/{isbn}
+func getLibraryBook(request *restful.Request, response *restful.Response) {
+	selectDb(request)
+	isbn := request.PathParameter("isbn")
+	application.Debug("Get library book with isbn", isbn)
+	book, err := store.GetBook(isbn)
+	if err != nil {
+		response.WriteError(404, err)
+	} else {
+		response.WriteEntity(book)
+	}
+}
+
 // POST http://1.2.3.4:8080/api/v1/library/{database}/books/{isbn}
 func addBookToLibrary(request *restful.Request, response *restful.Response) {
 	db := selectDb(request)
@@ -67,6 +80,13 @@ func rootWebService() *restful.WebService {
 		Metadata(restfulspec.KeyOpenAPITags, tags).
 		Param(ws.PathParameter("database", "database name").DataType("string")).
 		Writes([]store.Book{}))
+
+	ws.Route(ws.GET("/{database}/books/{isbn}").To(getLibraryBook).
+		Doc("get library book for specified isbn").
+		Metadata(restfulspec.KeyOpenAPITags, tags).
+		Param(ws.PathParameter("database", "database name").DataType("string")).
+		Param(ws.PathParameter("isbn", "isbn code").DataType("string")).
+		Writes(store.Book{}))
 
 	ws.Route(ws.POST("/{database}/books/{isbn}").To(addBookToLibrary).
 		Doc("get library books").

@@ -2,5 +2,6 @@
     "bingAPIkey": "...",
     "googleBookAPIKey": "...",
     "logLevel": "INFO",
-    "mongoDb": "mongodb://...:..."
+    "mongoDb": "mongodb://...:...",
+    "fileStore": "./files"
 }

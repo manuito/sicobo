@@ -6,11 +6,44 @@ import (
 	"errors"
 )
 
+// Monitors : all the monitoring elements in a channel
+var booksToComplete = make(chan *Book)
+
 // SelectActiveDatabase Select the active collection in mongo. Must be called before any mongo use
 func SelectActiveDatabase(name string) {
 	database := loadMongoDatabase(name)
 	spec := loadOrInitDatabaseSpec(database, name)
 	switchToDatabase(spec, database)
+}
+
+// StartPictureProcess start chan processing for book pictures completion
+func StartPictureProcess() {
+	go func() {
+		for {
+			book := <-booksToComplete
+			application.Debug("Begin completion of picture for book", book.Isbn)
+			CompleteBookPicture(book)
+		}
+	}()
+	application.Info("PictureProcess linked to book updates")
+}
+
+// GetBook read details for a book
+func GetBook(isbn string) (Book, error) {
+
+	book := loadBook(isbn)
+
+	if book.Isbn != "" {
+
+		// Complete missing picture
+		if book.PictureURL == "" {
+			booksToComplete <- &book
+		}
+
+		return book, nil
+	}
+
+	return book, errors.New("No book found for isbn " + isbn)
 }
 
 // AddNewBook Init and add new book to Store
@@ -19,6 +52,13 @@ func AddNewBook(isbn string) (Book, error) {
 	book := loadBook(isbn)
 
 	if book.Isbn != "" {
+
+		// Complete missing picture
+		if book.PictureURL == "" {
+			booksToComplete <- &book
+		}
+
+		// And stop with loaded book
 		return book, errors.New("already exist")
 	}
 
@@ -36,21 +76,33 @@ func AddNewBook(isbn string) (Book, error) {
 
 	insertBook(book)
 
+	// Add to completion process
+	booksToComplete <- &book
+
 	return book, nil
 }
 
 // CompleteBookPicture From isbn, search for picture links, and download 1st picture
 func CompleteBookPicture(book *Book) {
 
-	pictures := clients.SearchBingImage(book.Isbn)
+	pictureURLs := clients.SearchBingImage(book.Isbn)
 
 	// Result found
-	if len(pictures.Value) > 0 {
-		book.Picture = pictures.Value[0].ContentUrl
+	if len(pictureURLs.Value) > 0 {
+		book.PictureURL = pictureURLs.Value[0].ContentUrl
 
-		book.CandidateDetails.Pictures = make([]string, len(pictures.Value))
-		for i := range pictures.Value {
-			book.CandidateDetails.Pictures[i] = pictures.Value[i].ContentUrl
+		book.CandidateDetails.PictureURLs = make([]string, len(pictureURLs.Value))
+		for i := range pictureURLs.Value {
+			book.CandidateDetails.PictureURLs[i] = pictureURLs.Value[i].ContentUrl
+		}
+
+		// Download picture
+		file, err := clients.DownloadFile(book.Isbn, book.PictureURL)
+
+		if err == nil {
+			book.Picture = file
+		} else {
+			application.Error("Failed to download picture from ", book.PictureURL, err)
 		}
 	}
 

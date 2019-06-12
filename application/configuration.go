@@ -17,6 +17,7 @@ type Configuration struct {
 	GoogleBookAPIKey string `json:"googleBookAPIKey"`
 	LogLevel         string `json:"logLevel"`
 	MongoDb          string `json:"mongoDb"`
+	FileStore        string `json:"fileStore"`
 }
 
 func loadConfiguration() Configuration {

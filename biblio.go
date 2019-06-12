@@ -15,6 +15,8 @@ func main() {
 	store.StartConnect()
 	store.SelectActiveDatabase("other")
 
+	store.StartPictureProcess()
+
 	book, err := store.AddNewBook(isbn)
 
 	if err == nil {
