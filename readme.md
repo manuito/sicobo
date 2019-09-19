@@ -1,4 +1,4 @@
-# Sicobo - Simple personal commic book collection management
+# Sicobo - Simple personal comic book collection management
 
 Made for personal use - simple, light, open solution. Books are added by ISBN code, and data are identified in Azure bing cognitive services and google books public APIs.
 
