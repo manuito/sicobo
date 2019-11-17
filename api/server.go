@@ -8,8 +8,9 @@ package api
 import (
 	"log"
 	"net/http"
-	"sicobo/application"
-	"sicobo/store"
+
+	"github.com/manuito/sicobo/application"
+	"github.com/manuito/sicobo/store"
 
 	"github.com/emicklei/go-restful"
 	restfulspec "github.com/emicklei/go-restful-openapi"

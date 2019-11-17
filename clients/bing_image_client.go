@@ -3,8 +3,9 @@ package clients
 import (
 	"encoding/json"
 	"net/http"
-	"sicobo/application"
 	"strconv"
+
+	"github.com/manuito/sicobo/application"
 )
 
 type BSearchResult struct {

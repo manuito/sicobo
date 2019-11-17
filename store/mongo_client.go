@@ -3,8 +3,9 @@ package store
 import (
 	"context"
 	"log"
-	"sicobo/application"
 	"time"
+
+	"github.com/manuito/sicobo/application"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"

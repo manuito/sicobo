@@ -3,7 +3,8 @@ package clients
 import (
 	"encoding/json"
 	"net/http"
-	"sicobo/application"
+
+	"github.com/manuito/sicobo/application"
 )
 
 type GBookList struct {

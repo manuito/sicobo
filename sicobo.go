@@ -1,9 +1,9 @@
 package main
 
 import (
-	"sicobo/api"
-	"sicobo/application"
-	"sicobo/store"
+	"github.com/manuito/sicobo/api"
+	"github.com/manuito/sicobo/application"
+	"github.com/manuito/sicobo/store"
 )
 
 func main() {

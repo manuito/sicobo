@@ -5,8 +5,9 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-	"sicobo/application"
 	"strings"
+
+	"github.com/manuito/sicobo/application"
 )
 
 // DownloadFile will download a url to a local file. It's efficient because it will

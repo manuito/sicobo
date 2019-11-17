@@ -4,8 +4,9 @@ import (
 	"io/ioutil"
 	"net/http"
 	"regexp"
-	"sicobo/application"
 	"strconv"
+
+	"github.com/manuito/sicobo/application"
 )
 
 func cleanUp(s string) string {

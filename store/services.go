@@ -2,8 +2,9 @@ package store
 
 import (
 	"errors"
-	"sicobo/application"
-	"sicobo/clients"
+
+	"github.com/manuito/sicobo/application"
+	"github.com/manuito/sicobo/clients"
 )
 
 // Monitors : all the monitoring elements in a channel

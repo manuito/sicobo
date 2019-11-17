@@ -2,7 +2,8 @@ package application
 
 import (
 	"net"
-	"sicobo/tools"
+
+	"github.com/manuito/sicobo/tools"
 )
 
 /*
