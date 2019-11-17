@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/manuito/sicobo/api"
 	"github.com/manuito/sicobo/application"
+	_ "github.com/manuito/sicobo/docs"
 	"github.com/manuito/sicobo/store"
 )
 

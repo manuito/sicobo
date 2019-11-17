@@ -1,0 +1,146 @@
+definitions:
+  store.Author:
+    properties:
+      name:
+        type: string
+    type: object
+  store.Book:
+    properties:
+      authors:
+        items:
+          $ref: '#/definitions/store.Author'
+        type: array
+      candidateDetails:
+        $ref: '#/definitions/store.CandidateDetails'
+        type: object
+      category:
+        type: string
+      collection:
+        $ref: '#/definitions/store.BookCollection'
+        type: object
+      isbn:
+        type: string
+      pageCount:
+        type: integer
+      picture:
+        type: string
+      pictureURL:
+        type: string
+      publishedDate:
+        type: string
+      snippet:
+        type: string
+      title:
+        type: string
+    type: object
+  store.BookCollection:
+    properties:
+      active:
+        type: boolean
+      name:
+        type: string
+      totalVolumes:
+        type: integer
+    type: object
+  store.BookDatabaseSpec:
+    properties:
+      createTime:
+        type: string
+      lastLoadTime:
+        type: string
+      name:
+        type: string
+      totalBooks:
+        type: integer
+    type: object
+  store.CandidateDetails:
+    properties:
+      collections:
+        items:
+          type: string
+        type: array
+      degradedSource:
+        type: boolean
+      pictureURLs:
+        items:
+          type: string
+        type: array
+      titles:
+        items:
+          type: string
+        type: array
+    type: object
+info:
+  contact: {}
+  license: {}
+paths:
+  /api/v1/library/{database}:
+    get:
+      parameters:
+      - description: library code
+        in: path
+        name: database
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Spec for the requested library
+          schema:
+            $ref: '#/definitions/store.BookDatabaseSpec'
+      summary: Get detail specs for one specified library, identified by its name
+  /api/v1/library/{database}/books:
+    get:
+      parameters:
+      - description: library code
+        in: path
+        name: database
+        required: true
+        type: string
+      responses:
+        "200":
+          description: All books
+          schema:
+            items:
+              $ref: '#/definitions/store.Book'
+            type: array
+      summary: Get all managed books for one specified library
+  /api/v1/library/{database}/books/{isbn}:
+    get:
+      parameters:
+      - description: library code
+        in: path
+        name: database
+        required: true
+        type: string
+      - description: book ISBN code
+        in: path
+        name: isbn
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Available book for specified ISBN code
+          schema:
+            $ref: '#/definitions/store.Book'
+      summary: Get details for one book, from a library, identified by its isbn code
+    post:
+      parameters:
+      - description: library code
+        in: path
+        name: database
+        required: true
+        type: string
+      - description: book ISBN code. App will search for details using various service
+          providers
+        in: path
+        name: isbn
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Created book info for specified ISBN code
+          schema:
+            $ref: '#/definitions/store.Book'
+      summary: Add a new book to a specified library. The book is only identified
+        by its ISBN code
+swagger: "2.0"

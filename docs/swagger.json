@@ -1,0 +1,222 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {},
+        "license": {}
+    },
+    "paths": {
+        "/api/v1/library/{database}": {
+            "get": {
+                "summary": "Get detail specs for one specified library, identified by its name",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "library code",
+                        "name": "database",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Spec for the requested library",
+                        "schema": {
+                            "$ref": "#/definitions/store.BookDatabaseSpec"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/library/{database}/books": {
+            "get": {
+                "summary": "Get all managed books for one specified library",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "library code",
+                        "name": "database",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "All books",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/store.Book"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/library/{database}/books/{isbn}": {
+            "get": {
+                "summary": "Get details for one book, from a library, identified by its isbn code",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "library code",
+                        "name": "database",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "book ISBN code",
+                        "name": "isbn",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Available book for specified ISBN code",
+                        "schema": {
+                            "$ref": "#/definitions/store.Book"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add a new book to a specified library. The book is only identified by its ISBN code",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "library code",
+                        "name": "database",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "book ISBN code. App will search for details using various service providers",
+                        "name": "isbn",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Created book info for specified ISBN code",
+                        "schema": {
+                            "$ref": "#/definitions/store.Book"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "store.Author": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "store.Book": {
+            "type": "object",
+            "properties": {
+                "authors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/store.Author"
+                    }
+                },
+                "candidateDetails": {
+                    "type": "object",
+                    "$ref": "#/definitions/store.CandidateDetails"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "collection": {
+                    "type": "object",
+                    "$ref": "#/definitions/store.BookCollection"
+                },
+                "isbn": {
+                    "type": "string"
+                },
+                "pageCount": {
+                    "type": "integer"
+                },
+                "picture": {
+                    "type": "string"
+                },
+                "pictureURL": {
+                    "type": "string"
+                },
+                "publishedDate": {
+                    "type": "string"
+                },
+                "snippet": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "store.BookCollection": {
+            "type": "object",
+            "properties": {
+                "active": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "totalVolumes": {
+                    "type": "integer"
+                }
+            }
+        },
+        "store.BookDatabaseSpec": {
+            "type": "object",
+            "properties": {
+                "createTime": {
+                    "type": "string"
+                },
+                "lastLoadTime": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "totalBooks": {
+                    "type": "integer"
+                }
+            }
+        },
+        "store.CandidateDetails": {
+            "type": "object",
+            "properties": {
+                "collections": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "degradedSource": {
+                    "type": "boolean"
+                },
+                "pictureURLs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "titles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
