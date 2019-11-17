@@ -3,3 +3,4 @@ Gopkg.lock
 conf.json
 .vscode
 files
+.idea
