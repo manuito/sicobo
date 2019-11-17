@@ -71,14 +71,6 @@ func addBookToLibrary(c *gin.Context) {
 }
 
 // StartServer start the gin server route on all identified API entry points
-// @title SICOBO - Simple personal comic book collection management
-// @version 0.1
-// @description SICOBO backend services
-// @contact.name manuito
-// @contact.url https://github.com/manuito
-// @license.name Do What The Fuck You Want To Public License (WTFPL)
-// @license.url http://www.wtfpl.net/about/
-// @BasePath /api/v1
 func StartServer() {
 	r := gin.Default()
 

@@ -1,9 +1,19 @@
 {
     "swagger": "2.0",
     "info": {
-        "contact": {},
-        "license": {}
+        "description": "SICOBO backend services",
+        "title": "SICOBO - Simple personal comic book collection management",
+        "contact": {
+            "name": "manuito",
+            "url": "https://github.com/manuito"
+        },
+        "license": {
+            "name": "Do What The Fuck You Want To Public License (WTFPL)",
+            "url": "http://www.wtfpl.net/about/"
+        },
+        "version": "0.1"
     },
+    "basePath": "/api/v1",
     "paths": {
         "/api/v1/library/{database}": {
             "get": {

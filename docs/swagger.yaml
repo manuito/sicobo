@@ -1,3 +1,4 @@
+basePath: /api/v1
 definitions:
   store.Author:
     properties:
@@ -71,8 +72,15 @@ definitions:
         type: array
     type: object
 info:
-  contact: {}
-  license: {}
+  contact:
+    name: manuito
+    url: https://github.com/manuito
+  description: SICOBO backend services
+  license:
+    name: Do What The Fuck You Want To Public License (WTFPL)
+    url: http://www.wtfpl.net/about/
+  title: SICOBO - Simple personal comic book collection management
+  version: "0.1"
 paths:
   /api/v1/library/{database}:
     get:

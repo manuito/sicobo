@@ -7,6 +7,14 @@ import (
 	"github.com/manuito/sicobo/store"
 )
 
+// @title SICOBO - Simple personal comic book collection management
+// @version 0.1
+// @description SICOBO backend services
+// @contact.name manuito
+// @contact.url https://github.com/manuito
+// @license.name Do What The Fuck You Want To Public License (WTFPL)
+// @license.url http://www.wtfpl.net/about/
+// @BasePath /api/v1
 func main() {
 
 	application.Info("Starting sicobo MGNT app !")
