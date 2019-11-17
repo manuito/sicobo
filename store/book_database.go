@@ -1,7 +1,7 @@
 package store
 
 import (
-	"biblio/application"
+	"sicobo/application"
 
 	"go.mongodb.org/mongo-driver/mongo"
 )

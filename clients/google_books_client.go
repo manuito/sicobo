@@ -1,9 +1,9 @@
 package clients
 
 import (
-	"biblio/application"
 	"encoding/json"
 	"net/http"
+	"sicobo/application"
 )
 
 type GBookList struct {

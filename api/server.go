@@ -6,10 +6,10 @@ package api
  */
 
 import (
-	"biblio/application"
-	"biblio/store"
 	"log"
 	"net/http"
+	"sicobo/application"
+	"sicobo/store"
 
 	"github.com/emicklei/go-restful"
 	restfulspec "github.com/emicklei/go-restful-openapi"
@@ -104,8 +104,8 @@ func StartServer() {
 	restful.DefaultContainer.Add(rootWebService())
 
 	config := restfulspec.Config{
-		WebServices: restful.RegisteredWebServices(),
-		APIPath:     "/apidocs.json",
+		WebServices:                   restful.RegisteredWebServices(),
+		APIPath:                       "/apidocs.json",
 		PostBuildSwaggerObjectHandler: enrichSwaggerObject}
 	restful.DefaultContainer.Add(restfulspec.NewOpenAPIService(config))
 

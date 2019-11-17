@@ -1,9 +1,9 @@
 package store
 
 import (
-	"biblio/application"
-	"biblio/clients"
 	"errors"
+	"sicobo/application"
+	"sicobo/clients"
 )
 
 // Monitors : all the monitoring elements in a channel

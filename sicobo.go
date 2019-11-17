@@ -1,14 +1,14 @@
 package main
 
 import (
-	"biblio/api"
-	"biblio/application"
-	"biblio/store"
+	"sicobo/api"
+	"sicobo/application"
+	"sicobo/store"
 )
 
 func main() {
 
-	application.Info("Starting biblio MGNT app !")
+	application.Info("Starting sicobo MGNT app !")
 
 	isbn := "9782377540037"
 

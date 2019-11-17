@@ -1,11 +1,11 @@
 package clients
 
 import (
-	"biblio/application"
 	"io"
 	"net/http"
 	"os"
 	"path/filepath"
+	"sicobo/application"
 	"strings"
 )
 
